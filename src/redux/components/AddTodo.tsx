@@ -39,6 +39,7 @@ function AddTodo() {
         <StInput
           type="text"
           placeholder="제목"
+          maxLength={20}
           value={title}
           onChange={titleChangeHandler}
         />
@@ -46,6 +47,7 @@ function AddTodo() {
         <StInput
           type="text"
           placeholder="내용"
+          maxLength={50}
           value={content}
           onChange={contentChangeHandler}
         />
@@ -81,4 +83,5 @@ const StButton = styled.button`
   padding: 10px 30px;
   background-color: #006633;
   color: #fff;
+  cursor: pointer;
 `;

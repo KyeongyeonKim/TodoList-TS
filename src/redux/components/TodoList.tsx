@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../config/configStore";
 import { Todo, switchTodo, removeTodo } from "../modules/todos";
+import styled from "styled-components";
 
 interface TodoListProps {
   isActive: boolean;
@@ -21,27 +22,70 @@ const TodoList: React.FC<TodoListProps> = ({ isActive }) => {
 
   return (
     <div>
-      <h2>{isActive ? "Working... 🔥" : "Done... ✅"}</h2>
-      <div>
+      <StH2>{isActive ? "Working... 🔥" : "Done... ✅"}</StH2>
+      <StTodoList>
         {todos
           .filter((todo: Todo) => todo.isDone === !isActive)
           .map((list) => {
             return (
-              <div key={list.id}>
-                <div>{list.title}</div>
-                <div>{list.content}</div>
-                <button onClick={() => deleteBtnHandler(list.id)}>
-                  삭제하기
-                </button>
-                <button onClick={() => onChangeHandler(list.id)}>
-                  {isActive ? "완료" : "취소"}
-                </button>
-              </div>
+              <StTodo key={list.id}>
+                <p>{list.title}</p>
+                <p>{list.content}</p>
+                <FlexButtonBox>
+                  <StDeleteBtn onClick={() => deleteBtnHandler(list.id)}>
+                    삭제하기
+                  </StDeleteBtn>
+                  <StSwitchBtn onClick={() => onChangeHandler(list.id)}>
+                    {isActive ? "완료" : "취소"}
+                  </StSwitchBtn>
+                </FlexButtonBox>
+              </StTodo>
             );
           })}
-      </div>
+      </StTodoList>
     </div>
   );
 };
 
 export default TodoList;
+
+const StTodoList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const StH2 = styled.h2`
+  margin-left: 20px;
+`;
+
+const StTodo = styled.div`
+  border: 2px solid #006666;
+  border-radius: 10px;
+  width: 200px;
+  padding: 20px;
+  margin: 10px 20px;
+  word-break: break-all;
+`;
+
+const FlexButtonBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StDeleteBtn = styled.button`
+  border: 2px solid red;
+  border-radius: 10px;
+  background-color: #fff;
+  width: 49%;
+  height: 30px;
+  cursor: pointer;
+`;
+
+const StSwitchBtn = styled.button`
+  border: 2px solid #006666;
+  border-radius: 10px;
+  background-color: #fff;
+  width: 49%;
+  height: 30px;
+  cursor: pointer;
+`;
