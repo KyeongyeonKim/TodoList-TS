@@ -17,7 +17,7 @@ const TodoList: React.FC<TodoListProps> = ({ isActive }) => {
   };
 
   const deleteBtnHandler = (id: string) => {
-    dispatch(removeTodo(id));
+    if (window.confirm("정말로 삭제하시겠습니까?")) dispatch(removeTodo(id));
   };
 
   return (
