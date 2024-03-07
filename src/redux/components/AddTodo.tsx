@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { RootState } from "../config/configStore";
 import { addTodo } from "../modules/todos";
+import styled from "styled-components";
 
 function AddTodo() {
   const dispatch = useDispatch();
@@ -32,26 +33,52 @@ function AddTodo() {
   };
 
   return (
-    <>
+    <StInputArea>
       <form onSubmit={submitBtnClick}>
-        <label>제목</label>
-        <input
+        <StLabel>제목</StLabel>
+        <StInput
           type="text"
           placeholder="제목"
           value={title}
           onChange={titleChangeHandler}
         />
-        <label>내용</label>
-        <input
+        <StLabel>내용</StLabel>
+        <StInput
           type="text"
           placeholder="내용"
           value={content}
           onChange={contentChangeHandler}
         />
-        <button type="submit">제출</button>
+        <StButton type="submit">추가하기</StButton>
       </form>
-    </>
+    </StInputArea>
   );
 }
 
 export default AddTodo;
+
+const StInputArea = styled.div`
+  background-color: rgba(204, 204, 204, 0.5);
+  border-radius: 10px;
+  padding: 25px;
+`;
+
+const StLabel = styled.label`
+  font-weight: bold;
+  margin-right: 20px;
+`;
+
+const StInput = styled.input`
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  margin-right: 20px;
+`;
+
+const StButton = styled.button`
+  border: none;
+  border-radius: 10px;
+  padding: 10px 30px;
+  background-color: #006633;
+  color: #fff;
+`;
